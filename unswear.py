@@ -29,21 +29,27 @@ class Recorder:
     def evaluate_word(self):
         if self.buffer in self.word_pairs:
             self.delete_word(len(self.buffer))
-            self.keyboard.type(self.word_pairs[self.buffer] + " ")
+            self.keyboard.type(f"{self.word_pairs[self.buffer]} ")
 
     def delete_word(self, length):
-        for i in range(length + 1):
+        for _ in range(length + 1):
             self.keyboard.press(Key.backspace)
             self.keyboard.release(Key.backspace)
 
+
 if __name__ == "__main__":
-    pairs: dict[str, str] = {}
-    with open('replacements.csv', newline='') as f:
-        reader = csv.reader(f)
-        for item in reader:
-            pairs[item[0]] = item[1]
+    with open("replacements.csv", newline="") as f:
+        reader = csv.DictReader(f)
+        pairs: dict[str, str] = {
+            row["swear"]: row["replacement"] for row in reader
+        }
 
     recorder = Recorder(pairs)
 
-    with Listener(on_press=recorder.on_press, on_release=recorder.on_release) as listener:
-        listener.join()
+    try:
+        with Listener(
+            on_press=recorder.on_press, on_release=recorder.on_release
+        ) as listener:
+            listener.join()
+    except KeyboardInterrupt:
+        raise SystemExit(0)

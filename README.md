@@ -1,14 +1,7 @@
-
-<a name="readme-top"></a>
-
-
-
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="">
+  <a>
     <img src="holdmysnail.png" alt="Logo">
   </a>
 
@@ -28,23 +21,15 @@ This repo contains a simple python script that listens for words and then replac
 
 You can add new words here, separated by comma.
 
+## Setup
 
-
-## How to set up? 
-
-Since I don't have any Windows device available right now, and most of the people playing LoL play it on Windows, I cannot check if it works as it should.
-
-Howeveeeeer, the setup should be as simple as:
-
-```bash
-python -m pip install pynput
+### Linux and MacOS
+1. Give it permissions to run (first time only):
+```sh
+chmod +x run_unix.sh
 ```
 
-and 
-
-```bash
-python unswear.py
+2. Run it:
+```sh
+./run_unix.sh
 ```
-
-Please stay tuned as I'll make this way simpler to run on Win!
-
